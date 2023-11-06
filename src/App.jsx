@@ -15,7 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(function () {
-    async function fetchCities(params) {
+    async function fetchCities() {
       try {
         setIsLoading(true);
         const res = await fetch(`${BASE_URL}/cities`);

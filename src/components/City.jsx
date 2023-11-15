@@ -3,8 +3,8 @@
 import styles from "./City.module.css";
 // import ButtonBack from "./ButtonBack.module.css";
 
-import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";

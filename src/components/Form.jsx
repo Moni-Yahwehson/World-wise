@@ -2,7 +2,7 @@
 /* eslint-disable react-refresh/only-export-components */
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useNavigate } from "react";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
@@ -27,6 +27,7 @@ const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 function Form() {
   const [lat, lng] = useURLPosition();
   const { createCity, isLoading } = useCities();
+  const navigate = useNavigate();
 
   const [loadingGeo, setLoadingGeo] = useState(false);
   const [cityName, setCityName] = useState("");
@@ -66,7 +67,7 @@ function Form() {
     [lat, lng]
   );
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!cityName || !date) return;
@@ -80,7 +81,8 @@ function Form() {
       position: { lat, lng },
     };
 
-    createCity(newCity);
+    await createCity(newCity);
+    navigate("/app/cities");
   }
 
   if (loadingGeo) return <Spinner />;

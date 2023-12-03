@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import styles from "./CityItem.module.css";
 import { useCities } from "../contexts/CitiesContext";
+import styles from "./CityItem.module.css";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -10,18 +9,15 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
-// eslint-disable-next-line react/prop-types
-
-// eslint-disable-next-line react/prop-types
 function CityItem({ city }) {
   const { currentCity, deleteCity } = useCities();
-  // eslint-disable-next-line no-unused-vars
   const { cityName, emoji, date, id, position } = city;
 
   function handleClick(e) {
     e.preventDefault();
     deleteCity(id);
   }
+
   return (
     <li>
       <Link

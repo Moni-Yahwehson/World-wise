@@ -1,17 +1,14 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable react/prop-types */
-import CountryItem from "./CountryItem";
-import styles from "./CountryList.module.css";
 import Spinner from "./Spinner";
+import styles from "./CountryList.module.css";
+import CountryItem from "./CountryItem";
 import Message from "./Message";
 import { useCities } from "../contexts/CitiesContext";
 
-// eslint-disable-next-line react/prop-types
 function CountryList() {
   const { cities, isLoading } = useCities();
+
   if (isLoading) return <Spinner />;
 
-  // eslint-disable-next-line react/prop-types
   if (!cities.length)
     return (
       <Message message="Add your first city by clicking on a city on the map" />
@@ -22,7 +19,7 @@ function CountryList() {
       return [...arr, { country: city.country, emoji: city.emoji }];
     else return arr;
   }, []);
-  // eslint-disable-next-line react/prop-types
+
   return (
     <ul className={styles.countryList}>
       {countries.map((country) => (

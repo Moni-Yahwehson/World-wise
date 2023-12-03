@@ -1,6 +1,6 @@
 import { useState } from "react";
 
- export function useGeolocation(defaultPosition = null) {
+export function useGeolocation(defaultPosition = null) {
   const [isLoading, setIsLoading] = useState(false);
   const [position, setPosition] = useState(defaultPosition);
   const [error, setError] = useState(null);
@@ -8,6 +8,7 @@ import { useState } from "react";
   function getPosition() {
     if (!navigator.geolocation)
       return setError("Your browser does not support geolocation");
+
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -26,4 +27,3 @@ import { useState } from "react";
 
   return { isLoading, position, error, getPosition };
 }
-

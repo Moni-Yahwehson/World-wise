@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   MapContainer,
@@ -10,11 +7,12 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+
 import styles from "./Map.module.css";
 import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
 import { useGeolocation } from "../hooks/useGeolocation";
-import { useURLPosition } from "../hooks/useURLPosition";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 import Button from "./Button";
 
 function Map() {
@@ -25,7 +23,7 @@ function Map() {
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
-  const [mapLat, mapLng] = useURLPosition();
+  const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(
     function () {
@@ -41,6 +39,7 @@ function Map() {
     },
     [geolocationPosition]
   );
+
   return (
     <div className={styles.mapContainer}>
       {!geolocationPosition && (
@@ -48,6 +47,7 @@ function Map() {
           {isLoadingPosition ? "Loading..." : "Use your position"}
         </Button>
       )}
+
       <MapContainer
         center={mapPosition}
         zoom={6}
@@ -64,11 +64,11 @@ function Map() {
             key={city.id}
           >
             <Popup>
-              <span>{city.emoji}</span>
-              <span>{city.cityName}</span>
+              <span>{city.emoji}</span> <span>{city.cityName}</span>
             </Popup>
           </Marker>
         ))}
+
         <ChangeCenter position={mapPosition} />
         <DetectClick />
       </MapContainer>
@@ -84,10 +84,9 @@ function ChangeCenter({ position }) {
 
 function DetectClick() {
   const navigate = useNavigate();
+
   useMapEvents({
-    click: (e) => {
-      navigate(`form ? lat=${e.latlng.lat}& lng=${e.latlng.lng}`);
-    },
+    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
 }
 
